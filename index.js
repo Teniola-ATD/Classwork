@@ -1,33 +1,47 @@
-//import express
+// import express
 const express = require("express");
-//cors
+
+// cors
 const cors = require("cors");
-//mongoose
+
+// mongoose
 const mongoose = require("mongoose");
+
+// routes
 const router = require("./routes/userRoutes");
 
+// ===== DATABASE URLS =====
 const live_url =
-  "mongodb+srv://dev_esther:dev_esther2000@cluster0.xu8lvjr.mongodb.net/UserDB?appName=Cluster0";
+  "mongodb+srv://Ateniola:Ateniola%40@cluster0.hhdb23r.mongodb.net/userDB?retryWrites=true&w=majority";
+
 const local_url = "mongodb://localhost:27017/userDB";
 
-mongoose
-  .connect(live_url)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.error("Connection Error: ", err));
+// 👉 CHOOSE ONE DATABASE HERE
+const db_url = local_url; // change to live_url when using Atlas
 
-//create express app
+// connect to MongoDB (ONLY ONCE)
+mongoose
+  .connect(db_url)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error("Connection Error:", err));
+
+// create express app
 const app = express();
 const port = 7777;
+
+// middleware
 app.use(cors());
 app.use(express.json());
 
-//use routes
+// routes
 app.use("/api", router);
 
+// home route
 app.get("/", (req, res) => {
   res.send("api is ready for use");
 });
 
+// start server
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
