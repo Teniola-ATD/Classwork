@@ -16,7 +16,7 @@ const live_url =
 
 const local_url = "mongodb://localhost:27017/userDB";
 
-// 👉 CHOOSE ONE DATABASE HERE
+// CHOOSE ONE DATABASE HERE
 const db_url = local_url; // change to live_url when using Atlas
 
 // connect to MongoDB (ONLY ONCE)
